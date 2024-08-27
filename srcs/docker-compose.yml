@@ -4,15 +4,38 @@ services:
       context: /home/rgreiner/Documents/Inception/srcs/requirements/nginx
     container_name: nginx
     restart: always
+    volumes:
+      - wp-data:/var/www/html
+    networks:
+      - my_network
     ports:
-      - 8080:8080
- # mariadb:
-  #  build:
-  #    context: /home/rgreiner/Documents/Inception/srcs/requirements/mariadb
-   # container_name: mariadb
-  #  restart: always
- # wordpress:
- #   build:
-  #    context: /home/rgreiner/Documents/Inception/srcs/requirements/wordpress
-  #  container_name: wordpress
-   # restart: always
+      - 8080:80
+    depends_on:
+      - wordpress
+  mariadb:
+    build:
+      context: /home/rgreiner/Documents/Inception/srcs/requirements/mariadb
+    container_name: mariadb
+    restart: always
+    networks:
+      - my_network
+    ports:
+      - 3306:3306
+  wordpress:
+    build:
+      context: /home/rgreiner/Documents/Inception/srcs/requirements/wordpress
+    container_name: wordpress
+    restart: always
+    volumes:
+      - wp-data:/var/www/html
+    networks:
+      - my_network
+    ports:
+      - 9000:9090
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  wp-data:

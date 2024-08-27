@@ -16,6 +16,15 @@ RUN apk update && \
         tar \
         supervisor
 
+RUN mkdir -p /var/www/html/example.com && \
+    cd /var/www/html/example.com && \
+    wget https://wordpress.org/latest.tar.gz && \
+    tar -xvzf latest.tar.gz && \
+    rm latest.tar.gz
+
+COPY supervisord.conf /etc/supervisord.conf
+
 EXPOSE 9000
 
-ENTRYPOINT []
+ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
+
