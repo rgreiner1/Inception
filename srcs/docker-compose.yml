@@ -8,8 +8,6 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
-    ports:
-      - 8080:80
     depends_on:
       - wordpress
   mariadb:
@@ -19,8 +17,6 @@ services:
     restart: always
     networks:
       - my_network
-    ports:
-      - 3306:3306
   wordpress:
     build:
       context: /home/rgreiner/Documents/Inception/srcs/requirements/wordpress
@@ -30,8 +26,6 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
-    ports:
-      - 9000:9090
 
 networks:
   my_network:

@@ -4,5 +4,5 @@ RUN apk update && \
     apk add --no-cache nginx
 #COPY ./index.html /usr/share/nginx/html/index.html
 COPY ./default.conf /etc/nginx/http.d/default.conf
-EXPOSE 80
+EXPOSE 443
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
