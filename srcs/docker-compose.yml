@@ -1,7 +1,7 @@
 services:
   nginx:
     build:
-      context: /home/rgreiner/Documents/Inception/srcs/requirements/nginx
+      context: requirements/nginx
     container_name: nginx
     restart: always
     volumes:
@@ -12,14 +12,14 @@ services:
       - wordpress
   mariadb:
     build:
-      context: /home/rgreiner/Documents/Inception/srcs/requirements/mariadb
+      context: requirements/mariadb
     container_name: mariadb
     restart: always
     networks:
       - my_network
   wordpress:
     build:
-      context: /home/rgreiner/Documents/Inception/srcs/requirements/wordpress
+      context: requirements/wordpress
     container_name: wordpress
     restart: always
     volumes:
