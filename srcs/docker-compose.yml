@@ -8,6 +8,8 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
+    ports:
+      - "443:443"
     depends_on:
       - wordpress
   mariadb:
@@ -17,6 +19,10 @@ services:
     restart: always
     networks:
       - my_network
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
   wordpress:
     build:
       context: requirements/wordpress
@@ -26,6 +32,8 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
+    ports:
+      - "9000:9000"
 
 networks:
   my_network:

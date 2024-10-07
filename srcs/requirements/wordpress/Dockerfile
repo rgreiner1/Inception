@@ -18,7 +18,7 @@ RUN apk update && \
 
 RUN mkdir -p /var/www/html/example.com && \
     cd /var/www/html/example.com && \
-    wget https://wordpress.org/latest.tar.gz && \
+    curl -L -O https://wordpress.org/latest.tar.gz && \
     tar -xvzf latest.tar.gz && \
     rm latest.tar.gz
 
