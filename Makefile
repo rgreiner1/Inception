@@ -31,5 +31,6 @@ stop:
 
 .PHONY: clean
 clean:
-	cd $(COMPOSE_DIR) && docker system prune -f
 	cd $(COMPOSE_DIR) && docker-compose down -v
+	cd $(COMPOSE_DIR) && docker system prune -f -a
+	cd $(COMPOSE_DIR) && docker volume prune -f
