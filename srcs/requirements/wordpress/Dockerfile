@@ -24,7 +24,5 @@ RUN mkdir -p /var/www/html/example.com && \
 
 COPY supervisord.conf /etc/supervisord.conf
 
-EXPOSE 9000
-
 ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
 

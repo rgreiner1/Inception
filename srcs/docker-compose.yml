@@ -36,8 +36,6 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
-    ports:
-      - "9000:9000"
 
 networks:
   my_network:

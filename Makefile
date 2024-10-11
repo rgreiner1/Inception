@@ -15,22 +15,21 @@ COMPOSE_DIR = srcs/
 
 .PHONY: up
 up:
-	cd $(COMPOSE_DIR) && docker-compose up -d
+	cd $(COMPOSE_DIR) && docker compose up -d
 
 .PHONY: build
 build:
-	cd $(COMPOSE_DIR) && docker-compose up -d --build
+	cd $(COMPOSE_DIR) && docker compose up -d --build
 
 .PHONY: down
 down:
-	cd $(COMPOSE_DIR) && docker-compose down
+	cd $(COMPOSE_DIR) && docker compose down
 
 .PHONY: stop
 stop:
-	cd $(COMPOSE_DIR) && docker-compose stop
+	cd $(COMPOSE_DIR) && docker compose stop
 
 .PHONY: clean
 clean:
-	cd $(COMPOSE_DIR) && docker-compose down -v
+	cd $(COMPOSE_DIR) && docker compose down -v
 	cd $(COMPOSE_DIR) && docker system prune -f -a
-	cd $(COMPOSE_DIR) && docker volume prune -f
