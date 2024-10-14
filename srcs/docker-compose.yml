@@ -36,6 +36,11 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
+    secrets:
+      - env
+    depends_on:
+      - mariadb
+
 
 networks:
   my_network:

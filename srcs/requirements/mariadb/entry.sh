@@ -23,3 +23,4 @@ wait $MYSQL_PID
 
 echo "Starting MariaDB in foreground mode..."
 exec mysqld_safe --user=mysql --datadir=/var/lib/mysql --socket=/run/mysqld/mysqld.sock
+port
