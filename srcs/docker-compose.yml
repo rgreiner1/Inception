@@ -12,6 +12,8 @@ services:
       - "443:443"
     depends_on:
       - wordpress
+    env_file: .env
+
 
   mariadb:
     build:
@@ -24,8 +26,12 @@ services:
       - my_network
     ports:
       - "3306:3306"
+    env_file: .env
     secrets:
-      - env
+      - db_password
+      - db_root_password
+
+
 
   wordpress:
     build:
@@ -36,10 +42,12 @@ services:
       - wp-data:/var/www/html
     networks:
       - my_network
-    secrets:
-      - env
+    env_file: .env
     depends_on:
       - mariadb
+    secrets: 
+      - credentials
+      - db_password
 
 
 networks:
@@ -49,7 +57,10 @@ networks:
 volumes:
   wp-data:
 
-
 secrets:
-   env:
-     file: .env
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  credentials:
+    file: ../secrets/credentials.txt
