@@ -1,49 +1,28 @@
 FROM alpine:3.20
 
 RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache \
-        php \
-        php-fpm \
-        php-mysqli \
-        php-json \
-        php-xml \
-        php-mbstring \
-        php-curl \
-        php-phar \
-        php-opcache \
-        php-session \
-        curl \
-        tar \
-        supervisor \
-        bash
-
-RUN mkdir -p /var/www/html/example.com && \
-    cd /var/www/html/example.com && \
-    curl -L -O https://wordpress.org/latest.tar.gz && \
-    tar -xvzf latest.tar.gz && \
-    rm latest.tar.gz
+    apk upgrade
+RUN apk add php83 \
+    php83-fpm \
+    curl \
+    php83-mysqli \
+    php83-phar \
+    php83-common \
+    php83-apache2 \
+    php83-iconv \
+    bash
 
 RUN adduser -S www-data -G www-data
 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 COPY ./www.conf /etc/php83/php-fpm.d/www.conf
 
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
-
-
-RUN chown -R www-data:www-data /var/www/html/example.com/wordpress
-RUN chmod -R 755 /var/www/html/example.com/wordpress
-
-RUN chown -R nobody:nogroup /var/www/html/example.com
-RUN chmod -R 755 /var/www/html/example.com
-
 EXPOSE 9000
-
-COPY supervisord.conf /etc/supervisord.conf
-
 
 COPY entry.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entry.sh
-ENTRYPOINT ["/usr/local/bin/entry.sh"]
+
+CMD ["/usr/local/bin/entry.sh"]
