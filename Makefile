@@ -12,6 +12,8 @@
 
 
 COMPOSE_DIR = srcs/
+VOL_WWW=/home/rgreiner/data/www
+VOL_DB=/home/rgreiner/data/db
 
 .PHONY: up
 up:
@@ -19,6 +21,8 @@ up:
 
 .PHONY: build
 build:
+	sudo mkdir $(VOL_WWW)
+	sudo mkdir $(VOL_DB)
 	cd $(COMPOSE_DIR) && docker compose up -d --build
 
 .PHONY: down
@@ -31,5 +35,7 @@ stop:
 
 .PHONY: clean
 clean:
+	sudo rm -rf $(VOL_WWW)
+	sudo rm -rf $(VOL_DB)
 	cd $(COMPOSE_DIR) && docker compose down -v
 	cd $(COMPOSE_DIR) && docker system prune -f -a

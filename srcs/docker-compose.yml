@@ -38,7 +38,6 @@ services:
     restart: always
     volumes:
       - wp_data:/var/www/html
-      - db_data:/var/lib/mysql
     networks:
       - my_network
     env_file: .env
@@ -59,13 +58,13 @@ volumes:
     driver: local
     driver_opts:
       type: 'none'
-      device: ${VOL_WWW}
+      device: ${VOL_DB}
       o: 'bind'
   wp_data:
     driver: local
     driver_opts:
       type: 'none'
-      device: ${VOL_DB}
+      device: ${VOL_WWW}
       o: 'bind'
 
 secrets:

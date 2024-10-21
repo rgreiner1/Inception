@@ -5,6 +5,7 @@ RUN apk update && \
 RUN apk add php83 \
     php83-fpm \
     curl \
+    openssl \
     php83-mysqli \
     php83-phar \
     php83-common \
@@ -12,15 +13,15 @@ RUN apk add php83 \
     php83-iconv \
     bash
 
-RUN adduser -S www-data -G www-data
+COPY ./www.conf /etc/php83/php-fpm.d/www.conf
+
+EXPOSE 9000
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
-
-COPY ./www.conf /etc/php83/php-fpm.d/www.conf
-
-EXPOSE 9000
+    
+WORKDIR /var/www/html
 
 COPY entry.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entry.sh
