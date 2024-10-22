@@ -13,7 +13,7 @@ RUN apk add php83 \
     php83-iconv \
     bash
 
-COPY ./www.conf /etc/php83/php-fpm.d/www.conf
+COPY /conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 EXPOSE 9000
 
@@ -23,7 +23,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     
 WORKDIR /var/www/html
 
-COPY entry.sh /usr/local/bin/
+COPY /tools/entry.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entry.sh
 
 CMD ["/usr/local/bin/entry.sh"]

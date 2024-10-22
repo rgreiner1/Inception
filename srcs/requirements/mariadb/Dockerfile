@@ -16,13 +16,13 @@ RUN mkdir -p /var/lib/mysql && \
 
 RUN	rm -rf /etc/mysql/server.cnf /etc/server.cnf ~/server.cnf
 
-COPY ./server.cnf /etc/mysql/server.cnf
-COPY ./server.cnf /etc/server.cnf
-COPY ./server.cnf ~/server.cnf
+COPY ./conf/server.cnf /etc/mysql/server.cnf
+COPY ./conf/server.cnf /etc/server.cnf
+COPY ./conf/server.cnf ~/server.cnf
 
 EXPOSE 3306
 
-COPY ./entry.sh /
+COPY /tools/entry.sh /
 RUN chmod +x /entry.sh
 
 CMD ["/entry.sh"]

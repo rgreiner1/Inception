@@ -1,14 +1,9 @@
 #!/bin/bash
 
-# Load database credentials from secrets
 MB_PASSWORD=$(cat /run/secrets/db_password)
 MB_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 MB_DATABASE="${MYSQL_DATABASE}"  
-MB_USER="${MYSQL_USER}"
-
-echo "hostname :$MYSQL_HOSTNAME"
-echo "user :$MYSQL_USER"
-echo "rootpw :$MYSQL_ROOT_PASSWORD"
+MB_USER=$(awk -F'[()]' '/^WP_ROOT\(/ {print $2}' /run/secrets/credentials)
 
 # Create necessary directories
 if [ ! -d "/run/mysqld" ]; then

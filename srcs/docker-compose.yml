@@ -30,6 +30,7 @@ services:
     secrets:
       - db_password
       - db_root_password
+      - credentials
 
   wordpress:
     build:
