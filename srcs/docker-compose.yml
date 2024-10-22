@@ -70,8 +70,8 @@ volumes:
 
 secrets:
   db_password:
-    file: requirements/secrets/db_password.txt
+    file: ../secrets/db_password.txt
   db_root_password:
-    file: requirements/secrets/db_root_password.txt
+    file: ../secrets/db_root_password.txt
   credentials:
-    file: requirements/secrets/credentials.txt
+    file: ../secrets/credentials.txt
